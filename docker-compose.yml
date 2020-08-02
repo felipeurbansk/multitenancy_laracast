@@ -6,19 +6,25 @@ php:
     volumes:
         - ./app:/var/www/html
     links: 
-        - db
+        - mariadb
         - redis
-    
-db:
-    container_name: mysql
-    image: mysql
-    volumes: 
-        - /var/lib/mysql
+
+phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    links:
+        - mariadb
+    ports:
+        - 7070:80
+    environment: 
+        - PMA_ARBITRARY=1
+
+mariadb:
+    container_name: mariadb
+    image: mariadb
+    restart: always
     environment: 
         - MYSQL_ROOT_PASSWORD=google123
-        - MYSQL_DATABASE=crud_laravel
-        - MYSQL_USER=root
-        - MYSQL_PASSWORD=
 
 redis:
     container_name: redis
