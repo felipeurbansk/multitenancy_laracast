@@ -22,6 +22,6 @@ Route::get('/hello', function () {
     echo "Teste";
 });
 
-Route::get('/h', function () {
+Route::get('/he', function () {
     echo "Testando outra rota";
 });

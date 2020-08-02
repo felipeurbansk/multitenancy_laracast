@@ -1,10 +1,10 @@
+FROM ubuntu:latest
 FROM php:7.4-apache
 
-RUN apk update; \
-    apk upgrade;
+RUN apt-get update
 
-RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install mysqli && a2enmod rewrite
 
-RUN a2enmod rewrite
+COPY ./config/000-default.conf /etc/apache2/sites-enabled/
 
-RUN service apache2 reload
+RUN apt-get install nano
