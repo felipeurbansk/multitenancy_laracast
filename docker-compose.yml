@@ -1,0 +1,25 @@
+php:
+    container_name: php
+    build: .
+    ports: 
+        - "80:80"
+    volumes:
+        - ./app:/var/www/html
+    links: 
+        - db
+        - redis
+    
+db:
+    container_name: mysql
+    image: mysql
+    volumes: 
+        - /var/lib/mysql
+    environment: 
+        - MYSQL_ROOT_PASSWORD=google123
+        - MYSQL_DATABASE=crud_laravel
+        - MYSQL_USER=root
+        - MYSQL_PASSWORD=
+
+redis:
+    container_name: redis
+    image: redis
